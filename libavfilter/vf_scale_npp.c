@@ -286,6 +286,9 @@ static int init_processing_chain(AVFilterContext *ctx, int in_width, int in_heig
         }
     }
 
+    av_log(ctx, AV_LOG_ERROR, "out format: %s\n", av_get_pix_fmt_name(out_format));
+    av_log(ctx, AV_LOG_ERROR, "out deinterleaved format: %s\n", av_get_pix_fmt_name(out_deinterleaved_format));
+
     if (!s->stages[STAGE_RESIZE].stage_needed && in_format == out_format)
         s->passthrough = 1;
 
@@ -437,6 +440,8 @@ static int nppscale_interleave(AVFilterContext *ctx, NPPScaleStageContext *stage
 {
     AVHWFramesContext *out_frames_ctx = (AVHWFramesContext*)out->hw_frames_ctx->data;
     NppStatus err;
+
+    av_log(ctx, AV_LOG_ERROR, "sw_format: %s\n", av_get_pix_fmt_name(out_frames_ctx->sw_format));
 
     switch (out_frames_ctx->sw_format) {
     case AV_PIX_FMT_NV12:

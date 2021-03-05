@@ -286,6 +286,7 @@ static int init_processing_chain(AVFilterContext *ctx, int in_width, int in_heig
         }
     }
 
+    av_log(ctx, AV_LOG_ERROR, "int format: %s\n", av_get_pix_fmt_name(in_format));
     av_log(ctx, AV_LOG_ERROR, "out format: %s\n", av_get_pix_fmt_name(out_format));
     av_log(ctx, AV_LOG_ERROR, "out deinterleaved format: %s\n", av_get_pix_fmt_name(out_deinterleaved_format));
 
